@@ -15,5 +15,6 @@ feature2 = st.number_input("Feature 2")
 # Predict
 if st.button("Predict"):
     input_data = np.array([[feature1, feature2]])  # Adjust based on features
+    print("Input Data Shape:", input_data.shape)
     prediction = model.predict(input_data)
     st.write(f"Predicted Emission: {prediction[0]}")
