@@ -23,8 +23,8 @@ st.write("Enter input values to predict carbon emissions.")
 
 # ✅ **Real-World User Inputs**
 country = st.selectbox("Select Country", ["USA", "China", "India", "Germany", "Japan"])
-energy_consumption = st.number_input("Energy Consumption (kWh)", value=3.5, step=0.1)
-fuel_usage = st.number_input("Fuel Usage (liters)", value=150, step=1)
+energy_consumption = st.number_input("Energy Consumption (kWh)")
+fuel_usage = st.number_input("Fuel Usage (liters)")
 
 if st.button("Predict 🚀"):
     # ✅ **Ensure user_input is correctly defined**
