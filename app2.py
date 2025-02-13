@@ -14,32 +14,35 @@ st.write("Enter input values to predict carbon emissions.")
 
 # User Inputs
 country = st.selectbox("Select Country", ["USA", "China", "India", "Germany", "Japan"])  # Example countries
-feature1 = st.number_input("Feature 1", value=3.5, step=0.1)
-feature2 = st.number_input("Feature 2", value=150, step=1)
+energy_consumption = st.number_input("Energy Consumption (kWh)", value=3.5, step=0.1)
+fuel_usage = st.number_input("Fuel Usage (liters)", value=150, step=1)
 # Add more features if required...
 
 # Prediction
 if st.button("Predict 🚀"):
     # Create DataFrame for user input
-    user_input = {"Country": country, "feature1": feature1, "feature2": feature2}
-    input_df = pd.DataFrame([user_input])
+  user_input = {
+    "Country": country,  
+    "Energy Consumption (kWh)": energy_consumption,
+    "Fuel Usage (liters)": fuel_usage,
+}
 
-    # One-hot encode categorical variables (MUST match training time)
-    input_df = pd.get_dummies(input_df)
+input_df = pd.DataFrame([user_input])
 
-    # Ensure same column order as training (add missing columns as 0)
-    for col in feature_names:
-        if col not in input_df.columns:
-            input_df[col] = 0  
+# Ensure one-hot encoding for categorical features
+input_df = pd.get_dummies(input_df)
 
-    # Reorder columns to match training data
-    input_df = input_df[feature_names]
+# Align with training feature order
+for col in feature_names:
+    if col not in input_df.columns:
+        input_df[col] = 0  
 
-    # Apply scaling
-    input_scaled = scaler.transform(input_df)
+input_df = input_df[feature_names]
 
-    # Make prediction
-    prediction = model.predict(input_scaled)[0]
+# Apply scaling (if used in training)
+input_scaled = scaler.transform(input_df)
 
-    # Display Result
-    st.success(f"🌿 Predicted Carbon Emission: **{prediction:.2f}**")
+# Make Prediction
+prediction = model.predict(input_scaled)
+
+st.success(f"🌿 Predicted Carbon Emission: {prediction[0]:.2f}")
