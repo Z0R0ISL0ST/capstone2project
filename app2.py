@@ -50,9 +50,6 @@ if st.button("Predict 🚀"):
 
     input_df = input_df[feature_names]  # Reorder columns
 
-    st.write("🔍 Debug: Processed Input DataFrame")
-    st.write(input_df)  # Debugging: Show processed input DataFrame
-
     # ✅ **Apply scaling (if used during training)**
     input_scaled = scaler.transform(input_df)
 
