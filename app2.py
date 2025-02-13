@@ -18,3 +18,9 @@ if st.button("Predict"):
     print("Input Data Shape:", input_data.shape)
     prediction = model.predict(input_data)
     st.write(f"Predicted Emission: {prediction[0]}")
+
+
+import joblib
+
+# Load the saved scaler
+scaler = joblib.load('scaler.pkl')  # This restores the same scaler used during training
